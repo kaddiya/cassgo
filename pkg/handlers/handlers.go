@@ -10,7 +10,7 @@ import (
 
 func ListFoo(app *config.AppContainer) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		result := app.FooServiceImpl.GetFoo()
+		result := app.FooService.GetFoo()
 		fmt.Println(result)
 		w.WriteHeader(200)
 		w.Write([]byte("hello!"))

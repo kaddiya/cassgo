@@ -55,7 +55,7 @@ var getFooTests = []struct {
 }}
 
 func TestGetFoo(t *testing.T) {
-	a := &config.AppContainer{AppName: "Testing", FooServiceImpl: &services.FooServiceImpl{}}
+	a := &config.AppContainer{AppName: "Testing", FooService: &services.FooServiceImpl{}}
 	r := InitRouter(a)
 	server := httptest.NewServer(r)
 	for _, fixture := range getFooTests {
