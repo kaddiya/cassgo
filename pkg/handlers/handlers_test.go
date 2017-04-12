@@ -14,7 +14,7 @@ var routerTests = []struct {
 	URLPath    string
 	HTTPMethod string
 }{{
-	URLPath:    "/foo/",
+	URLPath:    "/Todo/",
 	HTTPMethod: "GET",
 }}
 
@@ -42,26 +42,26 @@ func TestRoutes(t *testing.T) {
 
 }
 
-var getFooTests = []struct {
+var getTodoTests = []struct {
 	URLPath    string
 	HTTPMethod string
 	StatusCode int
 	Message    string
 }{{
-	URLPath:    "/foo/",
+	URLPath:    "/Todo/",
 	HTTPMethod: "GET",
 	StatusCode: 200,
 	Message:    "Please enter a valid email id",
 }}
 
-func TestGetFoo(t *testing.T) {
-	a := &config.AppContainer{AppName: "Testing", FooService: &services.FooServiceImpl{}}
+func TestGetTodo(t *testing.T) {
+	a := &config.AppContainer{AppName: "Testing", TodoService: &services.TodoServiceImpl{}}
 	r := InitRouter(a)
 	server := httptest.NewServer(r)
-	for _, fixture := range getFooTests {
+	for _, fixture := range getTodoTests {
 		request, _ := http.NewRequest(fixture.HTTPMethod, fixture.URLPath, &NoOpReader{})
 		w := httptest.NewRecorder()
-		handler := http.HandlerFunc(ListFoo(a))
+		handler := http.HandlerFunc(ListTodo(a))
 		handler.ServeHTTP(w, request)
 		if w.Code != fixture.StatusCode {
 			t.Fail()

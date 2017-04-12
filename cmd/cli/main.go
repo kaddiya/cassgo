@@ -9,6 +9,6 @@ import (
 )
 
 func main() {
-	a := &config.AppContainer{AppName: "CassGo", FooService: &services.FooServiceImpl{}}
+	a := &config.AppContainer{AppName: "CassGo", TodoService: &services.TodoServiceImpl{}}
 	http.ListenAndServe(":3001", handlers.InitRouter(a))
 }

@@ -1,11 +1,14 @@
 package config
 
+import "github.com/gocql/gocql"
+
 // AppContainer holds the dependencies that are required
 type AppContainer struct {
-	AppName    string
-	FooService FooService
+	AppName     string
+	TodoService TodoService
+	CassSession *gocql.Session
 }
 
-type FooService interface {
-	GetFoo() []string
+type TodoService interface {
+	GetTodo() []string
 }
