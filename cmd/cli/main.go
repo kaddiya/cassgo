@@ -3,10 +3,12 @@ package main
 import (
 	"net/http"
 
+	"github.com/kaddiya/cassgo/pkg/config"
 	"github.com/kaddiya/cassgo/pkg/handlers"
+	"github.com/kaddiya/cassgo/pkg/services"
 )
 
 func main() {
-	a := &handlers.AppContainer{AppName: "CassGo"}
-	http.ListenAndServe(":3001", a.InitRouter())
+	a := &config.AppContainer{AppName: "CassGo", FooServiceImpl: &services.FooServiceImpl{}}
+	http.ListenAndServe(":3001", handlers.InitRouter(a))
 }

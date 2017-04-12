@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
+	"github.com/kaddiya/cassgo/pkg/config"
 )
 
 var routerTests = []struct {
@@ -24,8 +25,8 @@ func (r *NoOpReader) Read(p []byte) (n int, err error) {
 
 // TestRoutes tests the HTTP routes
 func TestRoutes(t *testing.T) {
-	a := &AppContainer{AppName: "Testing"}
-	r := a.InitRouter()
+	a := &config.AppContainer{AppName: "Testing"}
+	r := InitRouter(a)
 
 	for _, fixture := range routerTests {
 		request, _ := http.NewRequest(fixture.HTTPMethod, fixture.URLPath, &NoOpReader{})

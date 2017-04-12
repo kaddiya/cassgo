@@ -1,25 +1,33 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/kaddiya/cassgo/pkg/config"
 )
 
-// List will list all foos
-func (app *AppContainer) List(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(app.AppName))
+func ListFoo(app *config.AppContainer) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		result := app.FooServiceImpl.GetFoo()
+		fmt.Println(result)
+		w.Write([]byte("hello!"))
+	})
 }
 
-// Create will create a foo
-func (app *AppContainer) Create(w http.ResponseWriter, r *http.Request) {
-
+func CreateFoo(app *config.AppContainer) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		app.FooServiceImpl.CreateFoo()
+		w.Write([]byte("A foo sucessfully created!"))
+	})
 }
 
-//InitRouter initialised the router
-func (app *AppContainer) InitRouter() *mux.Router {
+func InitRouter(app *config.AppContainer) *mux.Router {
 	r := mux.NewRouter()
-	r.HandleFunc("/foo/", app.List).Methods("GET")
-	r.HandleFunc("/foo/", app.Create).Methods("POST")
+
+	r.HandleFunc("/foo/", ListFoo(app)).Methods("GET")
+	r.HandleFunc("/foo/", CreateFoo(app)).Methods("POST")
 	return r
+
 }
