@@ -49,7 +49,7 @@ var getFooTests = []struct {
 	Message    string
 }{{
 	URLPath:    "/foo/",
-	HTTPMethod: "POST",
+	HTTPMethod: "GET",
 	StatusCode: 200,
 	Message:    "Please enter a valid email id",
 }}
