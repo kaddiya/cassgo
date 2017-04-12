@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
 
-	"github.com/kaddiya/cassgo/pkg/container"
+	"github.com/kaddiya/cassgo/pkg/handlers"
 )
 
 func main() {
-	a := &container.AppContainer{AppName: "CassGo"}
-	fmt.Printf("Welcome to %s\n", a.AppName)
+	a := &handlers.AppContainer{AppName: "CassGo"}
+	http.ListenAndServe(":3001", a.InitRouter())
 }
