@@ -17,18 +17,9 @@ func ListFoo(app *config.AppContainer) http.HandlerFunc {
 	})
 }
 
-func CreateFoo(app *config.AppContainer) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		app.FooServiceImpl.CreateFoo()
-		w.Write([]byte("A foo sucessfully created!"))
-	})
-}
-
 func InitRouter(app *config.AppContainer) *mux.Router {
 	r := mux.NewRouter()
-
 	r.HandleFunc("/foo/", ListFoo(app)).Methods("GET")
-	r.HandleFunc("/foo/", CreateFoo(app)).Methods("POST")
 	return r
 
 }

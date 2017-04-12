@@ -8,5 +8,4 @@ type AppContainer struct {
 
 type FooService interface {
 	GetFoo() []string
-	CreateFoo()
 }
