@@ -7,7 +7,6 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/kaddiya/cassgo/pkg/config"
-	"github.com/kaddiya/cassgo/pkg/services"
 )
 
 var routerTests = []struct {
@@ -55,7 +54,7 @@ var getTodoTests = []struct {
 }}
 
 func TestGetTodo(t *testing.T) {
-	a := &config.AppContainer{AppName: "Testing", TodoService: &services.TodoServiceImpl{}}
+	a := &config.AppContainer{AppName: "Testing"}
 	r := InitRouter(a)
 	server := httptest.NewServer(r)
 	for _, fixture := range getTodoTests {
